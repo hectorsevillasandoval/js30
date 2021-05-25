@@ -57,34 +57,7 @@
       <audio data-key="75" src="sounds/tom.wav"></audio>
       <audio data-key="76" src="sounds/tink.wav"></audio>
 
-      <script>
-          // add Listener for the keys
-          window.addEventListener('keydown', playSound);
-
-          function playSound(e){
-            const audioElement = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-              const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-              // cancel the execution of the fn if the keycode doesnt exist
-              if( !audioElement ) return;
-              audioElement.currentTime = 0;
-              
-              audioElement.play();
-
-              key.classList.add('playing');
-          }
-
-          /**
-           * Listen to all Keys when transition has ended
-          */
-         const keys = document.querySelectorAll( '.key' );
-
-         keys.forEach( element => {
-            element.addEventListener('transitionend', (e) => {
-                if(e.propertyName !== 'transform') return;
-                 e.target.classList.remove('playing');
-             });
-         } );
-
-      </script>
+      <script src="./js/main.js" type="module"></script>
+      
 </body>
 </html>

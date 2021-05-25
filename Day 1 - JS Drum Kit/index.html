@@ -59,17 +59,19 @@
 
       <script>
           // add Listener for the keys
-          window.addEventListener('keydown', (e) => {
-              const audioElement = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+          window.addEventListener('keydown', playSound);
+
+          function playSound(e){
+            const audioElement = document.querySelector(`audio[data-key="${e.keyCode}"]`);
               const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
               // cancel the execution of the fn if the keycode doesnt exist
               if( !audioElement ) return;
               audioElement.currentTime = 0;
-              console.dir(audioElement);
+              
               audioElement.play();
 
               key.classList.add('playing');
-          });
+          }
 
           /**
            * Listen to all Keys when transition has ended

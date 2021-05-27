@@ -26,8 +26,8 @@ ClockJs.prototype.setDate = function () {
     const minsToDegrees = this.timeToDegrees(mins, 60);
     this.minutesHand.style.transform = this.animationAngle(minsToDegrees);
 
-    hour = now.getHours();
-    hourToDegrees = this.timeToDegrees(hour, 12);
+    const hour = now.getHours();
+    const hourToDegrees = this.timeToDegrees(hour, 12);
     this.hoursHand.style.transform = this.animationAngle(hourToDegrees);
 }
 

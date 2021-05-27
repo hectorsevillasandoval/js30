@@ -8,27 +8,27 @@ function ClockJs(secondsHand, minutesHand, hoursHand) {
     this.secondsHand = secondHand;
     this.minutesHand = minutesHand;
     this.hoursHand = hoursHand;
-    this.now = '';
+   
 
-    setInterval(this.setDate.bind(this), 1000);
+    setInterval(() => this.setDate(), 1000);
     
 
 }
 
 ClockJs.prototype.setDate = function () {
-    this.now = new Date();
-    this.seconds = this.now.getSeconds();
-    this.secondsToDegrees = this.timeToDegrees(this.seconds, 60);
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const secondsToDegrees = this.timeToDegrees(seconds, 60);
 
-    this.secondsHand.style.transform = this.animationAngle(this.secondsToDegrees);
+    this.secondsHand.style.transform = this.animationAngle(secondsToDegrees);
 
-    this.mins = this.now.getMinutes();
-    this.minsToDegrees = this.timeToDegrees(this.mins, 60);
-    this.minutesHand.style.transform = this.animationAngle(this.minsToDegrees);
+    const mins = now.getMinutes();
+    const minsToDegrees = this.timeToDegrees(mins, 60);
+    this.minutesHand.style.transform = this.animationAngle(minsToDegrees);
 
-    this.hour = this.now.getHours();
-    this.hourToDegrees = this.timeToDegrees(this.hour, 12);
-    this.hoursHand.style.transform = this.animationAngle(this.hourToDegrees);
+    hour = now.getHours();
+    hourToDegrees = this.timeToDegrees(hour, 12);
+    this.hoursHand.style.transform = this.animationAngle(hourToDegrees);
 }
 
 ClockJs.prototype.timeToDegrees = function(divisor, dividend) {

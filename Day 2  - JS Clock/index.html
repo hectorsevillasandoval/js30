@@ -79,31 +79,16 @@
 
   </style>
 
-  <script>
+  
+  <script type="module">
+      import ClockJs from './src/clock.js';
+
       const secondHand = document.querySelector('.second-hand');
       const minHand = document.querySelector('.min-hand');
       const hourHand = document.querySelector('.hour-hand');
-      function setDate(){
-        const now = new Date();
-        const seconds = now.getSeconds();
-        const secondsToDegrees = ( ( seconds / 60 ) * 360 ) + 90; // adding the default offset
-        console.log(seconds);
-        secondHand.style.transform = `rotate(${secondsToDegrees}deg)`;
-
-        const mins = now.getMinutes();
-        const minsToDegrees = ( (mins / 60) * 360 ) + 90;
-        minHand.style.transform = `rotate(${minsToDegrees}deg)`;
-
-        const hour = now.getHours();
-        const hourToDegrees = ( (hour / 12) * 360 ) + 90;
-        hourHand.style.transform = `rotate(${hourToDegrees}deg)`;
-
-      }
-
-
-
-      setInterval(setDate, 1000);
-
+      const ClockJsLib = new ClockJs(secondHand, minHand, hourHand);
+      
+      ClockJsLib.init();
   </script>
 </body>
 </html>

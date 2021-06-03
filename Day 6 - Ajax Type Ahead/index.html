@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Type Ahead 👀</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <form class="search-form">
+        <input type="text" class="search" placeholder="City or State">
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>or a state</li>
+        </ul>
+    </form>
+    <script>
+        const API = './data/nicaragua.json';
+        const nicaraguaCities = [];
+
+        fetch(API)
+            .then(response => response.json())
+            .then(data => nicaraguaCities.push(...data))
+
+        function matchData(wordToSearch, cities) {
+            //console.log(cities);
+            return cities.filter(place => {
+                const reg = new RegExp(wordToSearch, 'gi');
+                return place.name.match(reg);
+            });
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function getCity(){
+            const cities = matchData( this.value, nicaraguaCities );
+            const output = cities.map( place => {
+                const regex = new RegExp( this.value, 'gi' );
+                const cityName = place.name.replace( regex, `<span class="hl">${this.value.toLowerCase()}</span>` );
+                const populationWithCommas = numberWithCommas(place.population);
+                return `
+                    <li>
+                        <span class="name">${cityName}</span>
+                        <span class="population">${populationWithCommas}</span>
+                    </li>
+                `;
+            }).join('');
+
+            suggestions.innerHTML = output;
+        }
+
+        const searchBox = document.querySelector('.search-form input');
+        const suggestions = document.querySelector('.suggestions');
+        
+        searchBox.addEventListener('keyup', getCity);
+    </script>
+</body>
+
+</html>
